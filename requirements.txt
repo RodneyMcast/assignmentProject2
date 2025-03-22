@@ -1,0 +1,7 @@
+fastapi==0.110.0
+uvicorn==0.29.0
+motor==3.3.2
+pydantic==2.6.3
+python-dotenv==1.0.1
+python-multipart==0.0.9
+requests==2.31.0

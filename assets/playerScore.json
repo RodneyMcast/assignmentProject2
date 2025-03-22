@@ -1,0 +1,18 @@
+[
+  {
+    "player_name": "Alice",
+    "score": 1200
+  },
+  {
+    "player_name": "Bob",
+    "score": 3200
+  },
+  {
+    "player_name": "Charlie",
+    "score": 800
+  },
+  {
+    "player_name": "Dana",
+    "score": 2200
+  }
+]
