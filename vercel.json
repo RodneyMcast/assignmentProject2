@@ -8,8 +8,59 @@
   ],
   "routes": [
     {
+      "src": "/",
+      "dest": "main.py"
+    },
+    {
+      "src": "/docs",
+      "dest": "main.py"
+    },
+    {
+      "src": "/openapi.json",
+      "dest": "main.py"
+    },
+    {
+      "src": "/upload_sprite",
+      "dest": "main.py"
+    },
+    {
+      "src": "/upload_audio",
+      "dest": "main.py"
+    },
+    {
+      "src": "/player_score",
+      "dest": "main.py"
+    },
+    {
+      "src": "/sprites",
+      "dest": "main.py"
+    },
+    {
+      "src": "/sprites/(.*)",
+      "dest": "main.py"
+    },
+    {
+      "src": "/audio",
+      "dest": "main.py"
+    },
+    {
+      "src": "/audio/(.*)",
+      "dest": "main.py"
+    },
+    {
+      "src": "/player_scores",
+      "dest": "main.py"
+    },
+    {
+      "src": "/player_scores/(.*)",
+      "dest": "main.py"
+    },
+    {
       "src": "/(.*)",
       "dest": "main.py"
     }
-  ]
+  ],
+  "env": {
+    "PYTHON_VERSION": "3.11"
+  }
 }

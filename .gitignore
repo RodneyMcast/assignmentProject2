@@ -38,3 +38,6 @@ wheels/
 # OS specific files
 .DS_Store
 Thumbs.db
+
+#extra files to test
+security_test.py
