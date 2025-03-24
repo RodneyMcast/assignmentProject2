@@ -38,7 +38,7 @@ class PlayerScore(BaseModel):
     game_level: Optional[str] = "default"
 
 
-# Helper functions
+# Helper functions for NOSQL INJECTION PREVENTION
 def sanitize_input(value: Optional[str]) -> Optional[str]:
     """
     Sanitize user input to prevent NoSQL injection attacks.

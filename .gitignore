@@ -40,4 +40,3 @@ wheels/
 Thumbs.db
 
 #extra files to test
-security_test.py

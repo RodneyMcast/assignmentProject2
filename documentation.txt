@@ -1,0 +1,35 @@
+Documentation on the API endpoints and how each part works
+
+Sprites Endpoints
+POST /upload_sprite:
+This endpoint allows the users to upload .png image files. The file is read using await file.read(),
+then it is encoded using Base64 and stored in the sprites collection in MongoDB with its filename and content.
+The insert_one() method is then used to save the document. A response is then returned with the inserted ID.
+
+GET /sprites:
+This returns a list of all sprites excluding their actual content.
+The query uses MongoDB’s find() method with a projection to hide the content field.
+The cursor is then turned into a list and returned in the response.
+
+GET /sprites/{sprite_id}:
+This takes the ID of a sprite and retrieves the full document (this would include the Base64 content) from the sprites collection using find_one() with the _id.
+It checks for a valid ID format and handles errors if the ID doesn't exist.
+
+Audio Endpoints
+POST /upload_audio:
+Similar to the sprite upload, this takes an uploaded .wav file(the audio file), encodes it in Base64, and stores it in the audio collection in MongoDB.
+Data like filename is also stored. A success message and ID are returned.
+
+GET /audio:
+Returns data for all audio files without the Base64 content. It uses a simple find() query and skips the content field to reduce payload size.
+
+GET /audio/{audio_id}:
+Retrieves the audio document by its ID, this includes the Base64 content. It validates the ID, handles the exceptions, and returns the document if found.
+
+Player Score Endpoints
+POST /player_score:
+Accepts a JSON body with player_name and score. Before saving the input is sanitized to prevent NoSQL injection. The score is then inserted into the scores collection.
+The response would include the inserted ID and a confirmation message.
+
+GET /player_scores:
+Retrieves all player scores from the scores collection. It then loops through each document to format the ObjectID into a string

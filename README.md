@@ -1,60 +1,78 @@
-This project is a RESTful API for storing and retrieving multimedia game assets including sprites (images), audio files, and player scores using FastAPI and MongoDB Atlas.
+# Multimedia Game Assets API
 
-Development Environment Setup
-This project uses Python with the following dependencies:
+A RESTful API for storing and retrieving game multimedia assets using MongoDB Atlas.
 
-FastAPI – For modern and fast web framework for building APIs
+## Environment Setup (Task 1)
 
-Uvicorn – ASGI server for running FastAPI applications
+- **Python 3.11**: Programming language
+- **FastAPI**: Web framework for building APIs
+- **Uvicorn**: ASGI server implementation
+- **Motor**: Asynchronous MongoDB driver
+- **MongoDB Atlas**: Cloud database service
 
-Motor – So we have an asynchronous MongoDB driver
+Setup instructions:
+1. Create a virtual environment: `python -m venv .venv`
+2. Activate it: `.venv\Scripts\activate` (Windows)
+3. Install all dependencies: `pip install -r requirements.txt`
+4. Create a .env file to store Environment variables (the users personal MongoDB credentials)
 
-Pydantic – So that data validation and settings management is handled
+## Database Schema Design (Task 2)
 
-python-dotenv – For managing the environment variables
+The database uses three collections: Sprites, Audio, Scores
 
-python-multipart – For handling file uploads
+### Sprites Collection
+- `_id`: Unique identifier
+- `filename`: Original filename
+- `content`: Base64 encoded image data
 
-pymongo – For MongoDB access
+### Audio Collection
+- `_id`: Unique identifier
+- `filename`: Original filename
+- `content`: Base64 encoded audio data
 
-Setup Instructions
-Create a virtual environment:
+### Scores Collection
+- `_id`: Unique identifier
+- `player_name`: Name of the player
+- `score`: Numerical score value
 
-bash
-Copy
-python -m venv env
-source env/bin/activate  # On Windows: env\Scripts\activate
-Install dependencies:
+## API Endpoints (Task 3)
 
-bash
-Copy
-pip install -r requirements.txt
-Create a .env file in the project root with your MongoDB connection string:
+### Sprites
+- `POST /upload_sprite`: Uploads a sprite image
+- `GET /sprites`: Gets the list of all sprites (INFO: without content)
+- `GET /sprites/{sprite_id}`: Gets the specific sprite by ID
 
-bash
-Copy
-MONGO_CONNECTION_STRING=your_connection_string_here
-Run the API locally:
+### Audio
+- `POST /upload_audio`: Uploads an audio file
+- `GET /audio`: Gets the list of all audio files (INFO: without content)
+- `GET /audio/{audio_id}`: Gets the specific audio file by ID
 
-bash
-Copy
-uvicorn main:app --reload
-The API will be available at http://127.0.0.1:8000 and the interactive API documentation at http://127.0.0.1:8000/docs.
+### Player Scores
+- `POST /player_score`: Submits a player score
+- `GET /player_scores`: Gets all  the player scores
 
-API Endpoints
-POST /upload_sprite – Upload sprite image files
+## Security Measures (Task 4)
 
-POST /upload_audio – Upload audio files
+1. **Secure Credentials**
+   - MongoDB connection string stored in environment variables
+   - Sensitive data never hardcoded
 
-POST /player_score – Submit player scores
+2. **NoSQL Injection Prevention**
+   - Input sanitization is used for all user-supplied data
+   - Removal of MongoDB operators ($) from input strings for Nosql injection prevention 
+   - Parameter validation
 
-Project Structure
-bash
-Copy
-multimedia-db-api/
-├── .env                    # Environment variables (not committed to Git)
-├── .gitignore              # Git ignore file
-├── main.py                 # Main application file
-├── README.md               # Project documentation
-└── requirements.txt        # Project dependencies
-Feel free to adjust any wording as needed. This version follows your preferred style and includes all the key setup instructions and project details.
+## Folder Structure
+
+- `main.py`: Main application file with all API endpoints.
+- `db_init.py`: Initializes the MongoDB database and sets up schemas and indexes.
+- `db_populate.py`: Loads some sample data from folders to help test the API.
+- `assets/`: Folder that contains sample sprites, audio, and player score data.
+- `.env`: Environment variables (the users personal MongoDB credentials)
+- `requirements.txt`: Python dependencies for the project.
+- `render.yaml`: Deployment config for Render.
+
+## Deployment
+
+The project is deployed to Render.com. It uses Python 3.11 and installs dependencies from `requirements.txt`
+Once deployed, the API can be tested via the built-in Swagger documentation at `/docs`.
